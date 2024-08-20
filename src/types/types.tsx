@@ -3,6 +3,18 @@ export interface Item {
     text: string;
     quantity: number;
     category: string;
+    categoryId?:{
+        title: string;
+    }
+}
+export interface ItemsFromDB {
+    _id: string;
+    title: string;
+    quantity: number;
+    category: string;
+    categoryId:{
+        title: string;
+    }
 }
 
 export interface ListState {
@@ -14,7 +26,7 @@ export interface ListState {
 
 
 export interface ItemsList {
-    items: Item[];
+    items: ItemsFromDB[];
 }
 
 export interface ItemsProps {

@@ -110,17 +110,16 @@ export const listSlice = createSlice({
             increaseItemQuantity(action.payload.text, action.payload.category);
         },
         updateList: (state, action: PayloadAction<ItemsList>) => {
-            const { items } = action.payload;
+            const { items } = action.payload;      
             items.forEach(item => {
-                const categoryTitle = item.category;
+                const categoryTitle = item.categoryId.title;
                 state.list[categoryTitle].push({
-                    id: item.id,
-                    text: item.text,
+                    id: item._id,
+                    text: item.title,
                     quantity: item.quantity,
                     category: categoryTitle,
                 });
-            });
-
+            }); 
             state.totalItems = items.reduce((total, item) => {
                 return total + item.quantity;
             }, 0);

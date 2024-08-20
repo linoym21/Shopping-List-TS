@@ -17,9 +17,11 @@ const InteractiveList: React.FC = () => {
         const response = await axios.get('https://shopping-list-backend-a6vl.onrender.com/items');
         dispatch(updateList(response.data));
       } catch (error: any) {
-        console.error(error.response?.data?.error);
+    
+        console.error('Error fetching data:', error.message || error.response?.data?.error);
       }
     }
+
 
     fetchData();
   }, [dispatch]);
