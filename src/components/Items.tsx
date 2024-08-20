@@ -7,15 +7,10 @@ import { removeItem, decrementItem, incrementItem } from "../features/listSlice"
 import { useDispatch } from "react-redux";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { ItemList } from "../types/types";
+import { ItemsProps } from "../types/types";
 
-interface ItemProps {
-    data: ItemList
-}
-
-const Items: React.FC<ItemProps> = ({data}) => {
+const Items: React.FC<ItemsProps> = ({data}) => {
     const dispatch = useDispatch();
-
     return (
         <ListItem
             secondaryAction={

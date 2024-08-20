@@ -8,12 +8,8 @@ import Button from '@mui/material/Button';
 import { useState, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from '../features/listSlice';
+import { ListState } from "../types/types";
 
-interface RootState {
-    list: {
-        [key: string]: { text: string, id: number }[]; 
-    };
-}
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -52,7 +48,7 @@ export default function CustomizedSelects() {
     const [category, setCategory] = React.useState<string>('');
     const [error, setError] = useState<string>('');
     const dispatch = useDispatch();
-    const selectList = (state: RootState) => state.list;
+    const selectList = (state: ListState) => state.list;
     const list = useSelector(selectList);
     const categories = Object.keys(list);
 

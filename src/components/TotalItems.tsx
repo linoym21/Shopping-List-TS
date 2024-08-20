@@ -1,13 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { ListState } from "../types/types";
 
-// Define the shape of the Redux state
-interface TotalItemsProps {
-    totalItems: number;
-}
+
 
 const TotalItems: React.FC = () => {
-    const totalItems = useSelector((state: TotalItemsProps) => state.totalItems);
+    const totalItems = useSelector((state: ListState) => state.totalItems);
 
     return (
         <div>

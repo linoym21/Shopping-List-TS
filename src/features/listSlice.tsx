@@ -1,6 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { deleteItemFromServer, decreaseItemQuantity, increaseItemQuantity, addItemToServer } from '../utils/updateServer';
-import { ItemList,ListState,ItemsProps } from "../types/types";
+import { Item,ListState,ItemsList } from "../types/types";
 
 const initialState: ListState = {
     list: {
@@ -17,7 +17,7 @@ export const listSlice = createSlice({
     name: 'listAction',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<ItemList>) => {
+        addItem: (state, action: PayloadAction<Item>) => {
             const categoryList = state.list[action.payload.category];
             const existingItem = categoryList.find(item => item.text === action.payload.text);
 
@@ -45,7 +45,7 @@ export const listSlice = createSlice({
             
             addItemToServer(action.payload.text, action.payload.category);
         },
-        removeItem: (state, action: PayloadAction<ItemList>) => {
+        removeItem: (state, action: PayloadAction<Item>) => {
             const { category } = action.payload;
             const categoryList = state.list[category];
             if (!categoryList) {
@@ -65,7 +65,7 @@ export const listSlice = createSlice({
 
             deleteItemFromServer(action.payload.text, action.payload.category);
         },
-        decrementItem: (state, action: PayloadAction<ItemList>) => {
+        decrementItem: (state, action: PayloadAction<Item>) => {
             const categoryList = state.list[action.payload.category];
             const existingItem = categoryList.find(todo => todo.id === action.payload.id);
             if(existingItem){
@@ -90,7 +90,7 @@ export const listSlice = createSlice({
                 return total;
             }, 0);
         },
-        incrementItem: (state, action: PayloadAction<ItemList>) => {
+        incrementItem: (state, action: PayloadAction<Item>) => {
             const categoryList = state.list[action.payload.category];
             const existingItem = categoryList.find(todo => todo.id === action.payload.id);
             if (existingItem) {
@@ -109,13 +109,13 @@ export const listSlice = createSlice({
             }, 0);
             increaseItemQuantity(action.payload.text, action.payload.category);
         },
-        updateList: (state, action: PayloadAction<ItemsProps>) => {
+        updateList: (state, action: PayloadAction<ItemsList>) => {
             const { items } = action.payload;
             items.forEach(item => {
-                const categoryTitle = item.categoryId.title;
+                const categoryTitle = item.category;
                 state.list[categoryTitle].push({
-                    id: item._id,
-                    text: item.title,
+                    id: item.id,
+                    text: item.text,
                     quantity: item.quantity,
                     category: categoryTitle,
                 });

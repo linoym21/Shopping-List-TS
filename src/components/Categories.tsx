@@ -6,17 +6,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Items from './Items';
 import {ListState} from "../types/types";
+import { CategoriesProps } from "../types/types";
 
 const Demo = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
-
-
-interface CategoriesProps {
-  data: {
-    category: string;
-  };
-}
 
 
 export default function Categories({ data }: CategoriesProps) {
